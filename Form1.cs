@@ -44,7 +44,7 @@ namespace EVRPlayer
             m_pPlayer = new DShowPlayer(panVideoWin, Handle, WM_GRAPH_EVENT);
             m_pPlayer1 = new DShowPlayer(panel, Handle, WM_GRAPH_EVENT);
             m_bDrag = false;
-            m_pPlayer1.RunWebCam(Guid.Empty);
+            m_pPlayer1.RunWebCam(panVideoWin,panel,Guid.Empty);
         }
 
 
@@ -350,7 +350,7 @@ namespace EVRPlayer
 
         private void panVideoWin_Paint(object sender, PaintEventArgs e)
         {
-           // m_pPlayer.RepaintVideo();
+            m_pPlayer.RepaintVideo();
         }
 
         #region GraphEventCallback Members
@@ -385,7 +385,7 @@ namespace EVRPlayer
         private void btn_Click(object sender, EventArgs e)
         {            
             m_pPlayer1.Play();
-            panel.Invalidate();
+            panel.Invalidate();           
         }
 
         private void panel_Paint(object sender, PaintEventArgs e)

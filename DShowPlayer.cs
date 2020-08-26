@@ -161,10 +161,10 @@ namespace EVRPlayer
             return (IBaseFilter)source;
         }
 
-        public void RunWebCam(Guid clsidPresenter)
+        public void RunWebCam(Control c1,Control c2,Guid clsidPresenter)
         {
             int hr = S_Ok;
-
+            IBaseFilter teeFilter = (IBaseFilter)new SmartTee();
             // Create a new filter graph. (This also closes the old one, if any.)
             InitializeGraph();
 
@@ -173,12 +173,19 @@ namespace EVRPlayer
             IBaseFilter sourceFilter = FindCaptureDevice();
 
             hr = m_pGraph.AddFilter(sourceFilter, "Video Capture");
-            DsError.ThrowExceptionForHR(hr);            
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = m_pGraph.AddFilter(teeFilter, "Smart Tee");
+            DsError.ThrowExceptionForHR(hr);
+
+            hr = ConnectFilters(sourceFilter, teeFilter);
 
             try
             {
-                // Try to render the streams.
-                RenderWebCam(sourceFilter);
+
+                RenderWebCam(c1,teeFilter);
+                RenderWebCam(c2, teeFilter);
+                //  RenderWebCam(c2, teeFilter);
 
                 // Get the seeking capabilities.
                 hr = m_pSeek.GetCapabilities(out m_seekCaps);
@@ -196,7 +203,7 @@ namespace EVRPlayer
         {
             int hr = S_Ok;
 
-            IBaseFilter pSource = null;
+            IBaseFilter pSource = null;           
 
             // Create a new filter graph. (This also closes the old one, if any.)
             InitializeGraph();
@@ -857,7 +864,7 @@ namespace EVRPlayer
             IPin pPinOut = DsFindPin.ByConnectionStatus(filter2, PinConnectedStatus.Unconnected, 0); ;
             return m_pGraph.Connect(pPinIn,pPinOut);
         }
-        private void RenderWebCam(IBaseFilter pSource)
+        private void RenderWebCam(Control control,IBaseFilter pSource)
         {
             int hr;
             bool bRenderedVideo = false;
@@ -883,7 +890,7 @@ namespace EVRPlayer
                 hr = m_pGraph.AddFilter(pEVR, "EVR");
                 DsError.ThrowExceptionForHR(hr);
 
-                InitializeEVR(pEVR, 1, out m_pDisplay); 
+                EVRSetup(control,pEVR, 1, out m_pDisplay); 
                 try
                 {
                     hr = cap.SetFiltergraph(m_pGraph);
@@ -994,6 +1001,81 @@ namespace EVRPlayer
 
                 // Set the display position to the entire window.
                 Rectangle r = m_hwndVideo.ClientRectangle;
+                MFRect rc = new MFRect(r.Left, r.Top, r.Right, r.Bottom);
+
+                pDisplay.SetVideoPosition(null, rc);
+
+                // Return the IMFVideoDisplayControl pointer to the caller.
+                ppDisplay = pDisplay;
+            }
+            finally
+            {
+                //Marshal.ReleaseComObject(pDisplay);
+            }
+            m_pMixer = null;
+        }
+        private void EVRSetup(Control control,IBaseFilter pEVR, int dwStreams, out IMFVideoDisplayControl ppDisplay)
+        {
+            IMFVideoRenderer pRenderer;
+            IMFVideoDisplayControl pDisplay;
+            IEVRFilterConfig pConfig;
+            IMFVideoPresenter pPresenter;
+
+            // Before doing anything else, set any custom presenter or mixer.
+
+            // Presenter?
+            if (m_clsidPresenter != Guid.Empty)
+            {
+                Type type = Type.GetTypeFromCLSID(m_clsidPresenter);
+
+                // An error here means that the custom presenter sample from
+                // http://mfnet.sourceforge.net hasn't been installed or
+                // registered.
+                pPresenter = (IMFVideoPresenter)Activator.CreateInstance(type);
+
+                try
+                {
+                    pRenderer = (IMFVideoRenderer)pEVR;
+
+                    pRenderer.InitializeRenderer(null, pPresenter);
+                }
+                finally
+                {
+                    //Marshal.ReleaseComObject(pPresenter);
+                }
+            }
+
+            // Continue with the rest of the set-up.
+
+            // Set the video window.
+            object o;
+            IMFGetService pGetService = null;
+            pGetService = (IMFGetService)pEVR;
+            pGetService.GetService(MFServices.MR_VIDEO_RENDER_SERVICE, typeof(IMFVideoDisplayControl).GUID, out o);
+
+            try
+            {
+                pDisplay = (IMFVideoDisplayControl)o;
+            }
+            catch
+            {
+                Marshal.ReleaseComObject(o);
+                throw;
+            }
+
+            try
+            {
+                // Set the number of streams.
+                pDisplay.SetVideoWindow(control.Handle);
+
+                if (dwStreams > 1)
+                {
+                    pConfig = (IEVRFilterConfig)pEVR;
+                    pConfig.SetNumberOfStreams(dwStreams);
+                }
+
+                // Set the display position to the entire window.
+                Rectangle r = control.ClientRectangle;
                 MFRect rc = new MFRect(r.Left, r.Top, r.Right, r.Bottom);
 
                 pDisplay.SetVideoPosition(null, rc);
