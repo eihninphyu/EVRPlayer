@@ -160,63 +160,63 @@ namespace EVRPlayer
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip1.Size = new System.Drawing.Size(990, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFileToolStripMenuItem,
-            this.subpictureToolStripMenuItem,
-            this.evToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // openFileToolStripMenuItem
-            // 
-            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.openFileToolStripMenuItem.Text = "&Open File";
-            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
-            // 
-            // subpictureToolStripMenuItem
-            // 
-            this.subpictureToolStripMenuItem.Name = "subpictureToolStripMenuItem";
-            this.subpictureToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.subpictureToolStripMenuItem.Text = "&Subpicture";
-            this.subpictureToolStripMenuItem.Click += new System.EventHandler(this.subpictureToolStripMenuItem_Click);
-            // 
-            // evToolStripMenuItem
-            // 
-            this.evToolStripMenuItem.Name = "evToolStripMenuItem";
-            this.evToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.evToolStripMenuItem.Text = "&EVR Presenter";
-            this.evToolStripMenuItem.Click += new System.EventHandler(this.evToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
+            //this.menuStrip1.BackColor = System.Drawing.SystemColors.MenuBar;
+            //this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.fileToolStripMenuItem});
+            //this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            //this.menuStrip1.Name = "menuStrip1";
+            //this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            //this.menuStrip1.Size = new System.Drawing.Size(990, 24);
+            //this.menuStrip1.TabIndex = 0;
+            //this.menuStrip1.Text = "menuStrip1";
+            //// 
+            //// fileToolStripMenuItem
+            //// 
+            //this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.openFileToolStripMenuItem,
+            //this.subpictureToolStripMenuItem,
+            //this.evToolStripMenuItem,
+            //this.toolStripSeparator1,
+            //this.exitToolStripMenuItem});
+            //this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            //this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            //this.fileToolStripMenuItem.Text = "&File";
+            //// 
+            //// openFileToolStripMenuItem
+            //// 
+            //this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            //this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            //this.openFileToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            //this.openFileToolStripMenuItem.Text = "&Open File";
+            //this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            //// 
+            //// subpictureToolStripMenuItem
+            //// 
+            //this.subpictureToolStripMenuItem.Name = "subpictureToolStripMenuItem";
+            //this.subpictureToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            //this.subpictureToolStripMenuItem.Text = "&Subpicture";
+            //this.subpictureToolStripMenuItem.Click += new System.EventHandler(this.subpictureToolStripMenuItem_Click);
+            //// 
+            //// evToolStripMenuItem
+            //// 
+            //this.evToolStripMenuItem.Name = "evToolStripMenuItem";
+            //this.evToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            //this.evToolStripMenuItem.Text = "&EVR Presenter";
+            //this.evToolStripMenuItem.Click += new System.EventHandler(this.evToolStripMenuItem_Click);
+            //// 
+            //// toolStripSeparator1
+            //// 
+            //this.toolStripSeparator1.Name = "toolStripSeparator1";
+            //this.toolStripSeparator1.Size = new System.Drawing.Size(164, 6);
+            //// 
+            //// exitToolStripMenuItem
+            //// 
+            //this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            //this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            //this.exitToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            //this.exitToolStripMenuItem.Text = "E&xit";
+            //this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            //// 
             // timer1
             // 
             this.timer1.Interval = 200;
